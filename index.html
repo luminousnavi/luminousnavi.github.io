@@ -1619,7 +1619,7 @@ return;
 
 
 let message =
-"Hello! I would like to place an order:%0A%0A";
+"Hello LuminousNavi! I would like to place an order:\n\n";
 
 
 let total = 0;
@@ -1645,9 +1645,16 @@ subtotal.toLocaleString() +
 
 
 message +=
-"%0ATotal: ₱" +
-total.toLocaleString();
+"\nTotal: ₱" +
+total.toLocaleString() +
+"\n\nPlease guide me on how to proceed with payment and delivery details.";
 
+
+navigator.clipboard.writeText(message).then(function() {
+alert("Your order details have been copied! Please paste (Ctrl + V) them into our Messenger chat to proceed with payment and delivery.");
+}, function(err) {
+console.error('Could not copy text: ', err);
+});
 
 /*
 * CHANGE THIS NUMBER TO YOUR
@@ -1657,15 +1664,13 @@ total.toLocaleString();
 * 639171234567
 */
 
-const phone =
-"639XXXXXXXXX";
+const fbPageUsername =
+"LuminousNaviPH";
 
 
 window.open(
-"https://wa.me/" +
-phone +
-"?text=" +
-message,
+"https://m.me/" +
+fbPageUsername,
 "_blank"
 );
 
