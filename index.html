@@ -1,491 +1,333 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>luminousnavi — BORN IN THE SHADOWS. BUILT FOR THE SPOTLIGHT.</title>
-    <style>
-        /* General Reset & Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        body {
-            background-color: #f9f6f0;
-            color: #222222;
-        }
+  <title>LuminousNavi | Clothing</title>
 
-        /* Hero Section with Multiple Background Slider */
-        .hero-slider {
-            position: relative;
-            width: 100%;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            overflow: hidden;
-            background-size: cover;
-            background-position: center;
-            animation: slideBackground 15s infinite linear;
-        }
+  <meta
+    name="description"
+    content="LuminousNavi — modern clothing for your everyday style."
+  >
 
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6); /* Dark overlay to make text pop */
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 800px;
-            padding: 20px;
-        }
-
-        .hero-content h1 {
-            font-size: 3rem;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        .hero-content p {
-            font-size: 1.2rem;
-            color: #ccc;
-            letter-spacing: 1px;
-        }
-
-        /* Keyframes for Background Slider */
-        @keyframes slideBackground {
-            0% {
-                background-image: url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1600');
-                background-position: center;
-            }
-            33% {
-                background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1600');
-                background-position: center;
-            }
-            66% {
-                background-image: url('https://images.unsplash.com/photo-1445205170230-053b83016050?w=1600');
-                background-position: center;
-            }
-            100% {
-                background-image: url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1600');
-                background-position: center;
-            }
-        }
-
-        /* Header / Navbar */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 40px;
-            background: #f9f6f0;
-            border-bottom: 1px solid #222;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .logo {
-            font-weight: bold;
-            font-size: 1.5rem;
-            letter-spacing: 1px;
-        }
-
-        #cart-icon {
-            cursor: pointer;
-            background: #222;
-            padding: 10px 15px;
-            border-radius: 20px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        #cart-icon:hover {
-            background: #444;
-        }
-
-        /* Products Section */
-        .products-section {
-            padding: 60px 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .products-section h2 {
-            text-align: center;
-            margin-bottom: 40px;
-            font-size: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .product {
-            background: #141414;
-            border: 1px solid #222;
-            border-radius: 8px;
-            overflow: hidden;
-            transition: transform 0.3s;
-        }
-
-        .product:hover {
-            transform: translateY(-5px);
-        }
-
-        .product-image img {
-            width: 100%;
-            height: 320px;
-            object-fit: cover;
-        }
-
-        .product-info {
-            padding: 20px;
-            text-align: center;
-        }
-
-        .product-info h3 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-        }
-
-        .product-info p {
-            color: #aaa;
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-        }
-
-        .add-to-bag-btn {
-            background: #fff;
-            color: #000;
-            border: none;
-            padding: 10px 20px;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 4px;
-            width: 100%;
-            transition: 0.3s;
-        }
-
-        .add-to-bag-btn:hover {
-            background: #0084FF;
-            color: #fff;
-        }
-
-        /* Cart Drawer / Modal */
-        #cart-modal {
-            display: none;
-            position: fixed;
-            right: 0;
-            top: 0;
-            width: 350px;
-            height: 100%;
-            background: #121212;
-            color: #fff;
-            box-shadow: -5px 0 15px rgba(0,0,0,0.7);
-            padding: 30px 20px;
-            z-index: 1000;
-            overflow-y: auto;
-        }
-
-        .cart-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #333;
-            padding-bottom: 15px;
-            margin-bottom: 20px;
-        }
-
-        #close-cart {
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        #cart-items-list {
-            list-style: none;
-            margin-bottom: 20px;
-        }
-
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            border-bottom: 1px solid #222;
-            padding-bottom: 10px;
-            font-size: 0.95rem;
-        }
-
-        .cart-summary {
-            border-top: 1px solid #333;
-            padding-top: 15px;
-            margin-top: 20px;
-        }
-
-        #checkout-messenger-btn {
-            width: 100%;
-            background: #0084FF;
-            color: #fff;
-            padding: 12px;
-            border: none;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 15px;
-            border-radius: 5px;
-            font-size: 1rem;
-            transition: 0.3s;
-        }
-
-        #checkout-messenger-btn:hover {
-            background: #006dd6;
-        }
-
-        /* Let's Talk Section */
-        #lets-talk {
-            background: #050505;
-            color: #fff;
-            padding: 60px 20px;
-            text-align: center;
-            border-top: 1px solid #222;
-        }
-
-        #lets-talk h2 {
-            margin-bottom: 10px;
-            font-size: 2rem;
-            text-transform: uppercase;
-        }
-
-        #lets-talk p {
-            color: #888;
-            margin-bottom: 30px;
-        }
-
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            align-items: center;
-        }
-
-        .social-icons a {
-            color: #fff;
-            font-size: 32px;
-            transition: 0.3s;
-            display: inline-block;
-        }
-
-        .social-icons a:hover {
-            color: #0084FF;
-            transform: scale(1.15);
-        }
-    </style>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-    <!-- Header -->
-    <header>
-        <div class="logo">LUMINOUS</div>
-        <div id="cart-icon">
-            🛒 Bag (<span id="cart-count">0</span>)
-        </div>
-    </header>
+  <!-- ================= HEADER ================= -->
+  <header class="header">
 
-    <!-- Hero Section with Background Slider -->
-    <section class="hero-slider">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <h1>Luminousnavi</h1>
-            <p>Born in the shadows. Built for the spotlight.</p>
-        </div>
-    </section>
+    <a href="#" class="logo">
+      LUMINOUS<span>NAVI</span>
+    </a>
 
-    <!-- Products Section -->
-    <section class="products-section">
-        <h2>Featured Collection</h2>
-        <div class="product-grid">
-            <!-- Product 1 -->
-            <article class="product" data-category="outerwear">
-                <div class="product-image">
-                    <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600" alt="Shadow Jacket">
-                </div>
-                <div class="product-info">
-                    <h3>Shadow Jacket</h3>
-                    <p>₱2,500</p>
-                    <button class="add-to-bag-btn" data-name="Shadow Jacket" data-price="2500">Add to Bag</button>
-                </div>
-            </article>
+    <nav class="navigation">
+      <a href="#shop">Shop</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
 
-            <!-- Product 2 -->
-            <article class="product" data-category="outerwear">
-                <div class="product-image">
-                    <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600" alt="Midnight Hoodie">
-                </div>
-                <div class="product-info">
-                    <h3>Midnight Hoodie</h3>
-                    <p>₱1,800</p>
-                    <button class="add-to-bag-btn" data-name="Midnight Hoodie" data-price="1800">Add to Bag</button>
-                </div>
-            </article>
+    <button class="bag-button" onclick="openCart()">
+      Bag
+      <span id="cartCount">0</span>
+    </button>
 
-            <!-- Product 3 -->
-            <article class="product" data-category="tees">
-                <div class="product-image">
-                    <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=600" alt="Spotlight Tee">
-                </div>
-                <div class="product-info">
-                    <h3>Spotlight Tee</h3>
-                    <p>₱850</p>
-                    <button class="add-to-bag-btn" data-name="Spotlight Tee" data-price="850">Add to Bag</button>
-                </div>
-            </article>
-        </div>
-    </section>
+  </header>
 
-    <!-- Let's Talk Section -->
-    <section id="lets-talk">
-        <h2>Let's Talk</h2>
-        <p>Have questions or want to place a direct order? Get in touch with us:</p>
-        
-        <div class="social-icons">
-            <!-- Facebook Logo Link -->
-            <a href="https://facebook.com/LuminousNaviPH" target="_blank" title="Facebook Page">
-                <svg width="36" height="36" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/>
-                </svg>
-            </a>
 
-            <!-- Gmail Logo Link -->
-            <a href="mailto:luminousnavi@gmail.com" title="Email Us">
-                <svg width="36" height="36" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 12.713l-11.985-9.713h23.97l-11.985 9.713zm0 2.574l-12-9.717v15.43h24v-15.43l-12 9.717z"/>
-                </svg>
-            </a>
-        </div>
-    </section>
+  <!-- ================= HERO ================= -->
+  <section class="hero">
 
-    <!-- Shopping Bag Drawer Modal -->
-    <div id="cart-modal">
-        <div class="cart-header">
-            <h2>Your Bag</h2>
-            <button id="close-cart">&times;</button>
-        </div>
-        <ul id="cart-items-list">
-            <p style="color: #666; text-align: center; margin-top: 40px;">Your bag is empty.</p>
-        </ul>
-        <div class="cart-summary">
-            <p style="font-size: 1.1rem; display: flex; justify-content: space-between;">
-                <span>Total:</span> 
-                <strong>₱<span id="cart-total">0</span></strong>
-            </p>
-            <button id="checkout-messenger-btn">Checkout via Messenger 💬</button>
-        </div>
+    <div class="hero-content">
+
+      <p class="small-title">
+        LUMINOUSNAVI PH
+      </p>
+
+      <h1>
+        WEAR<br>
+        YOUR<br>
+        LIGHT.
+      </h1>
+
+      <p>
+        Modern pieces made for your everyday style.
+      </p>
+
+      <a href="#shop" class="hero-button">
+        SHOP NOW
+      </a>
+
     </div>
 
-    <!-- JavaScript for Interactions -->
-    <script>
-        let cart = [];
+  </section>
 
-        const addToBagButtons = document.querySelectorAll('.add-to-bag-btn');
-        const cartCount = document.getElementById('cart-count');
-        const cartIcon = document.getElementById('cart-icon');
-        const cartModal = document.getElementById('cart-modal');
-        const closeCart = document.getElementById('close-cart');
-        const cartItemsList = document.getElementById('cart-items-list');
-        const cartTotal = document.getElementById('cart-total');
-        const checkoutMessengerBtn = document.getElementById('checkout-messenger-btn');
 
-        // Add to Bag click handler
-        addToBagButtons.forEach(button => {
-            button.addEventListener('click', (e) => {
-                const name = e.target.getAttribute('data-name');
-                const price = parseFloat(e.target.getAttribute('data-price'));
+  <!-- ================= SHOP ================= -->
+  <section class="shop" id="shop">
 
-                const existingItem = cart.find(item => item.name === name);
-                if (existingItem) {
-                    existingItem.quantity += 1;
-                } else {
-                    cart.push({ name, price, quantity: 1 });
-                }
+    <div class="section-header">
 
-                updateCartUI();
-                cartModal.style.display = 'block'; 
-            });
-        });
+      <div>
+        <p class="small-title">
+          NEW COLLECTION
+        </p>
 
-        // Function to update Cart UI
-        function updateCartUI() {
-            const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-            cartCount.textContent = totalCount;
+        <h2>
+          Shop LuminousNavi
+        </h2>
+      </div>
 
-            cartItemsList.innerHTML = '';
-            let totalPrice = 0;
+      <div class="filters">
 
-            if (cart.length === 0) {
-                cartItemsList.innerHTML = '<p style="color: #666; text-align: center; margin-top: 40px;">Your bag is empty.</p>';
-            } else {
-                cart.forEach(item => {
-                    const li = document.createElement('li');
-                    li.className = 'cart-item';
-                    li.innerHTML = `
-                        <span>${item.name} (x${item.quantity})</span>
-                        <span>₱${item.price * item.quantity}</span>
-                    `;
-                    cartItemsList.appendChild(li);
-                    totalPrice += item.price * item.quantity;
-                });
-            }
+        <button
+          class="filter active"
+          onclick="filterProducts('All', this)">
+          All
+        </button>
 
-            cartTotal.textContent = totalPrice;
-        }
+        <button
+          class="filter"
+          onclick="filterProducts('Tops', this)">
+          Tops
+        </button>
 
-        // Open/Close Cart Modal
-        cartIcon.addEventListener('click', () => {
-            cartModal.style.display = 'block';
-        });
+        <button
+          class="filter"
+          onclick="filterProducts('Bottoms', this)">
+          Bottoms
+        </button>
 
-        closeCart.addEventListener('click', () => {
-            cartModal.style.display = 'none';
-        });
+        <button
+          class="filter"
+          onclick="filterProducts('Accessories', this)">
+          Accessories
+        </button>
 
-        // Messenger Checkout Integration
-        checkoutMessengerBtn.addEventListener('click', () => {
-            if (cart.length === 0) {
-                alert("Your bag is empty!");
-                return;
-            }
+      </div>
 
-            let message = "Hi LUMINOUS, I would like to order the following items:\n\n";
-            let totalPrice = 0;
+    </div>
 
-            cart.forEach(item => {
-                message += `- ${item.name} (x${item.quantity}) - ₱${item.price * item.quantity}\n`;
-                totalPrice += item.price * item.quantity;
-            });
 
-            message += `\nTotal Amount: ₱${totalPrice}\n\nHow do I proceed with payment and shipping details?`;
+    <div
+      class="products"
+      id="products">
+    </div>
 
-            const encodedMessage = encodeURIComponent(message);
-            const fbMessengerURL = `https://m.me/LuminousNaviPH?text=${encodedMessage}`;
+  </section>
 
-            window.open(fbMessengerURL, '_blank');
-        });
-    </script>
+
+  <!-- ================= ABOUT ================= -->
+  <section class="about" id="about">
+
+    <p class="small-title">
+      ABOUT LUMINOUSNAVI
+    </p>
+
+    <h2>
+      SIMPLE PIECES.<br>
+      STRONG IDENTITY.
+    </h2>
+
+    <p>
+      LuminousNavi is a Philippine clothing brand
+      focused on clean, wearable pieces that let
+      your personal style shine.
+    </p>
+
+  </section>
+
+
+  <!-- ================= CONTACT ================= -->
+  <section class="contact" id="contact">
+
+    <p class="small-title">
+      LET'S TALK
+    </p>
+
+    <h2>
+      Questions about<br>
+      your order?
+    </h2>
+
+    <p>
+      Message the LuminousNavi Facebook page for
+      sizes, availability, shipping and payment.
+    </p>
+
+    <a
+      href="https://web.facebook.com/LuminousNaviPH"
+      target="_blank"
+      class="contact-button">
+
+      VISIT FACEBOOK PAGE
+
+    </a>
+
+  </section>
+
+
+  <!-- ================= FOOTER ================= -->
+  <footer>
+
+    <strong>
+      LUMINOUSNAVI
+    </strong>
+
+    <p>
+      © 2026 LuminousNavi. All rights reserved.
+    </p>
+
+  </footer>
+
+
+  <!-- ================= CART BACKDROP ================= -->
+  <div
+    class="cart-backdrop"
+    id="cartBackdrop"
+    onclick="closeCart()">
+  </div>
+
+
+  <!-- ================= CART ================= -->
+  <aside
+    class="cart"
+    id="cart">
+
+    <div class="cart-header">
+
+      <h2>
+        YOUR BAG
+      </h2>
+
+      <button onclick="closeCart()">
+        ×
+      </button>
+
+    </div>
+
+
+    <div
+      class="cart-items"
+      id="cartItems">
+
+      <!-- Products will appear here -->
+
+    </div>
+
+
+    <div class="cart-footer">
+
+      <div class="total">
+
+        <span>
+          TOTAL
+        </span>
+
+        <strong id="cartTotal">
+          ₱0.00
+        </strong>
+
+      </div>
+
+
+      <button
+        class="checkout-button"
+        onclick="checkout()">
+
+        PROCEED TO MESSENGER
+
+      </button>
+
+
+      <p class="checkout-info">
+
+        Your order summary will be copied
+        before Messenger opens.
+
+      </p>
+
+    </div>
+
+  </aside>
+
+
+  <!-- ================= CHECKOUT MODAL ================= -->
+  <div
+    class="modal"
+    id="checkoutModal">
+
+    <div class="modal-box">
+
+      <button
+        class="modal-close"
+        onclick="closeModal()">
+
+        ×
+
+      </button>
+
+
+      <p class="small-title">
+        ORDER READY
+      </p>
+
+
+      <h2>
+        Send your order
+      </h2>
+
+
+      <p>
+        Your order summary has been prepared.
+        Copy it and send it to LuminousNavi Messenger.
+      </p>
+
+
+      <textarea
+        id="orderSummary"
+        readonly>
+      </textarea>
+
+
+      <div class="modal-buttons">
+
+        <button
+          class="copy-button"
+          onclick="copyOrder()">
+
+          COPY ORDER
+
+        </button>
+
+
+        <a
+          href="https://m.me/LuminousNaviPH"
+          target="_blank"
+          class="messenger-button">
+
+          OPEN MESSENGER
+
+        </a>
+
+      </div>
+
+
+      <small>
+
+        After Messenger opens, paste the order
+        summary and send it to LuminousNavi.
+
+      </small>
+
+    </div>
+
+  </div>
+
+
+  <script src="script.js"></script>
+
 </body>
 </html>
