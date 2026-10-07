@@ -1610,51 +1610,22 @@ CHECKOUT
 function checkout() {
 
 if (cart.length === 0) {
-
 alert("Your bag is empty.");
-
 return;
-
 }
 
 
-let message =
-"Hello LuminousNavi! I would like to place an order:\n\n";
-
-
+let message = "Hello LuminousNavi! I would like to place an order:\n\n";
 let total = 0;
 
 
 cart.forEach(function(item) {
-
-const subtotal =
-item.price * item.quantity;
-
+const subtotal = item.price * item.quantity;
 total += subtotal;
-
-message +=
-"• " +
-item.name +
-" x" +
-item.quantity +
-" - ₱" +
-subtotal.toLocaleString() +
-"%0A";
-
+message += "• " + item.name + " x" + item.quantity + " - ₱" + subtotal.toLocaleString() + "\n";
 });
 
-
-message +=
-"\nTotal: ₱" +
-total.toLocaleString() +
-"\n\nPlease guide me on how to proceed with payment and delivery details.";
-
-
-navigator.clipboard.writeText(message).then(function() {
-alert("Your order details have been copied! You will now be redirected to our Facebook Page. Please paste (Ctrl + V) your order in the chat.");
-}).catch(function(err) {
-console.error('Could not copy text: ', err);
-});
+message += "\nTotal: ₱" + total.toLocaleString() + "\n\nPlease guide me on how to proceed with payment and delivery details.";
 
 /*
 * CHANGE THIS NUMBER TO YOUR
@@ -1664,8 +1635,10 @@ console.error('Could not copy text: ', err);
 * 639171234567
 */
 
+const encodedMessage = encodeURIComponent(message);
 const fbPageUsername = "LuminousNaviPH";
-window.location.href = "https://m.me/" + fbPageUsername;
+
+window.location.href = "https://m.me/" + fbPageUsername + "?text=" + encodedMessage;
 
 }
 
