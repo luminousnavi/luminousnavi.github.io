@@ -1651,8 +1651,8 @@ total.toLocaleString() +
 
 
 navigator.clipboard.writeText(message).then(function() {
-alert("Your order details have been copied! Please paste (Ctrl + V) them into our Messenger chat to proceed with payment and delivery.");
-}, function(err) {
+alert("Your order details have been copied! You will now be redirected to our Facebook Page. Please paste (Ctrl + V) your order in the chat.");
+}).catch(function(err) {
 console.error('Could not copy text: ', err);
 });
 
@@ -1664,15 +1664,8 @@ console.error('Could not copy text: ', err);
 * 639171234567
 */
 
-const fbPageUsername =
-"LuminousNaviPH";
-
-
-window.open(
-"https://m.me/" +
-fbPageUsername,
-"_blank"
-);
+const fbPageUsername = "LuminousNaviPH";
+window.location.href = "https://m.me/" + fbPageUsername;
 
 }
 
