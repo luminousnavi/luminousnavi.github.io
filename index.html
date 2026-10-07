@@ -1627,6 +1627,12 @@ message += "• " + item.name + " x" + item.quantity + " - ₱" + subtotal.toLoc
 
 message += "\nTotal: ₱" + total.toLocaleString() + "\n\nPlease guide me on how to proceed with payment and delivery details.";
 
+navigator.clipboard.writeText(message).then(function() {
+alert("Na-copy na ang iyong order details! I-paste (Ctrl+V) na lang po ito sa aming Messenger chat.");
+}).catch(function(err) {
+console.error('Could not copy text: ', err);
+});  
+  
 /*
 * CHANGE THIS NUMBER TO YOUR
 * BUSINESS / VIBER / WHATSAPP NUMBER.
@@ -1635,10 +1641,8 @@ message += "\nTotal: ₱" + total.toLocaleString() + "\n\nPlease guide me on how
 * 639171234567
 */
 
-const encodedMessage = encodeURIComponent(message);
 const fbPageUsername = "LuminousNaviPH";
-
-window.location.href = "https://m.me/" + fbPageUsername + "?text=" + encodedMessage;
+window.open("https://m.me/" + fbPageUsername, "_blank");
 
 }
 
