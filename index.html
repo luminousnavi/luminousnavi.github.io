@@ -1609,41 +1609,58 @@ CHECKOUT
 
 function checkout() {
 
-if (cart.length === 0) {
-alert("Your bag is empty.");
-return;
-}
+    if (cart.length === 0) {
+        alert("Your bag is empty.");
+        return;
+    }
 
+    let message = "Hello LuminousNavi! I would like to place an order:\n\n";
+    let total = 0;
 
-let message = "Hello LuminousNavi! I would like to place an order:\n\n";
-let total = 0;
+    cart.forEach(function(item) {
+        const subtotal = item.price * item.quantity;
+        total += subtotal;
 
+        message += "• " + item.name +
+                   " x" + item.quantity +
+                   " - ₱" + subtotal.toLocaleString() + "\n";
+    });
 
-cart.forEach(function(item) {
-const subtotal = item.price * item.quantity;
-total += subtotal;
-message += "• " + item.name + " x" + item.quantity + " - ₱" + subtotal.toLocaleString() + "\n";
-});
+    message += "\nTotal: ₱" + total.toLocaleString() +
+               "\n\nPlease guide me on how to proceed with payment and delivery details.";
 
-message += "\nTotal: ₱" + total.toLocaleString() + "\n\nPlease guide me on how to proceed with payment and delivery details.";
+    if (navigator.clipboard && navigator.clipboard.writeText) {
 
-navigator.clipboard.writeText(message).then(function() {
-alert("Na-copy na ang iyong order details! I-paste (Ctrl+V) na lang po ito sa aming Messenger chat.");
-}).catch(function(err) {
-console.error('Could not copy text: ', err);
-});  
-  
-/*
-* CHANGE THIS NUMBER TO YOUR
-* BUSINESS / VIBER / WHATSAPP NUMBER.
-*
-* Example:
-* 639171234567
-*/
+        navigator.clipboard.writeText(message)
+            .then(function() {
 
-const fbPageUsername = "LuminousNaviPH";
-window.open("https://m.me/" + fbPageUsername, "_blank");
+                alert(
+                    "Your order details have been copied! " +
+                    "Please paste them into our Messenger chat using Ctrl+V."
+                );
 
+            })
+            .catch(function(err) {
+
+                console.error("Could not copy text:", err);
+
+                alert(
+                    "We could not copy your order details automatically. " +
+                    "Messenger will still open."
+                );
+
+            });
+
+    } else {
+
+        alert(
+            "Messenger will open. " +
+            "Please prepare your order details to paste into the chat."
+        );
+
+    }
+
+    window.open("https://m.me/LuminousNaviPH", "_blank");
 }
 
 </script>
