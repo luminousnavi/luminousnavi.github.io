@@ -434,7 +434,7 @@ font-size: 12px;
 }
 
 /* =========================
-PRODUCT MODAL (DETAIL VIEW)
+PRODUCT MODAL (OPTIMIZED)
 ========================= */
 
 .modal-overlay {
@@ -448,7 +448,7 @@ transition: 0.3s;
 display: flex;
 justify-content: center;
 align-items: center;
-padding: 20px;
+padding: 15px;
 }
 
 .modal-overlay.open {
@@ -458,14 +458,14 @@ visibility: visible;
 
 .product-modal {
 background: white;
-width: min(950px, 100%);
-max-height: 90vh;
+width: min(900px, 100%);
+max-height: 85vh;
 overflow-y: auto;
 position: relative;
 display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 30px;
-padding: 35px;
+grid-template-columns: 1fr 1.1fr;
+gap: 25px;
+padding: 25px;
 border-radius: 4px;
 transform: translateY(20px);
 transition: transform 0.3s ease;
@@ -477,30 +477,30 @@ transform: translateY(0);
 
 .close-modal {
 position: absolute;
-top: 20px;
-right: 20px;
+top: 15px;
+right: 15px;
 border: none;
 background: none;
-font-size: 28px;
+font-size: 26px;
 cursor: pointer;
 z-index: 10;
 }
 
 .modal-gallery {
 display: flex;
-gap: 15px;
+gap: 12px;
 }
 
 .modal-thumbnails-side {
 display: flex;
 flex-direction: column;
-gap: 10px;
-width: 65px;
+gap: 8px;
+width: 55px;
 }
 
 .m-thumb {
-width: 65px;
-height: 65px;
+width: 55px;
+height: 55px;
 object-fit: cover;
 cursor: pointer;
 opacity: 0.5;
@@ -531,41 +531,41 @@ flex-direction: column;
 }
 
 .modal-tag {
-font-size: 11px;
+font-size: 10px;
 text-transform: uppercase;
-letter-spacing: 2px;
+letter-spacing: 1.5px;
 color: #777;
-margin-bottom: 8px;
+margin-bottom: 4px;
 }
 
 .modal-title-text {
-font-size: 22px;
+font-size: 16px;
 font-weight: 700;
 text-transform: uppercase;
-letter-spacing: -0.5px;
-margin-bottom: 12px;
+letter-spacing: -0.3px;
+margin-bottom: 8px;
 line-height: 1.2;
 }
 
 .modal-price-text {
-font-size: 20px;
+font-size: 16px;
 font-weight: bold;
-margin-bottom: 20px;
+margin-bottom: 12px;
 }
 
 /* Tabs */
 .modal-tabs {
 display: flex;
 border-bottom: 1px solid #ddd;
-margin-bottom: 15px;
-gap: 20px;
+margin-bottom: 10px;
+gap: 15px;
 }
 
 .m-tab-btn {
 background: none;
 border: none;
-padding: 8px 0;
-font-size: 12px;
+padding: 6px 0;
+font-size: 11px;
 text-transform: uppercase;
 letter-spacing: 1px;
 cursor: pointer;
@@ -590,9 +590,11 @@ background: #111;
 
 .m-tab-content {
 display: none;
-font-size: 13px;
+font-size: 12px;
 color: #444;
-margin-bottom: 20px;
+margin-bottom: 12px;
+max-height: 120px;
+overflow-y: auto;
 }
 
 .m-tab-content.active {
@@ -601,49 +603,49 @@ display: block;
 
 .m-tab-content ul {
 list-style-type: disc;
-padding-left: 18px;
+padding-left: 15px;
 }
 
 .m-tab-content li {
-margin-bottom: 6px;
+margin-bottom: 4px;
 }
 
 /* Ordering Instructions Box */
 .order-instruction-box {
 background: #f4f3f0;
-padding: 12px 15px;
+padding: 10px 12px;
 border-left: 3px solid #111;
-font-size: 12px;
-margin-bottom: 20px;
+font-size: 11px;
+margin-bottom: 12px;
 color: #333;
-line-height: 1.4;
+line-height: 1.35;
 }
 
 .order-instruction-box strong {
 display: block;
 text-transform: uppercase;
-letter-spacing: 1px;
-margin-bottom: 4px;
-font-size: 11px;
+letter-spacing: 0.5px;
+margin-bottom: 2px;
+font-size: 10px;
 }
 
 .modal-buttons {
 display: flex;
 flex-direction: column;
-gap: 10px;
+gap: 8px;
 margin-top: auto;
 }
 
 .btn-black {
 width: 100%;
-padding: 15px;
+padding: 12px;
 border: 1px solid #111;
 background: #111;
 color: white;
 cursor: pointer;
 text-transform: uppercase;
-letter-spacing: 2px;
-font-size: 12px;
+letter-spacing: 1.5px;
+font-size: 11px;
 font-weight: bold;
 }
 
@@ -653,14 +655,14 @@ opacity: 0.85;
 
 .btn-outline {
 width: 100%;
-padding: 15px;
+padding: 12px;
 border: 1px solid #111;
 background: transparent;
 color: #111;
 cursor: pointer;
 text-transform: uppercase;
-letter-spacing: 2px;
-font-size: 12px;
+letter-spacing: 1.5px;
+font-size: 11px;
 font-weight: bold;
 }
 
@@ -840,7 +842,7 @@ align-items: flex-start;
 
 .product-modal {
 grid-template-columns: 1fr;
-padding: 20px;
+padding: 15px;
 }
 }
 
@@ -1188,70 +1190,6 @@ FOOTER
 
 
 <!-- =========================
-CART
-========================== -->
-
-<div
-class="cart-overlay"
-id="cartOverlay"
-onclick="closeCart()">
-</div>
-
-
-<aside class="cart" id="cart">
-
-<div class="cart-header">
-
-<h2>
-Your Bag
-</h2>
-
-<button
-class="close-cart"
-onclick="closeCart()">
-×
-</button>
-
-</div>
-
-
-<div class="cart-items" id="cartItems">
-
-<div class="empty-cart">
-Your bag is empty.
-</div>
-
-</div>
-
-
-<div class="cart-footer">
-
-<div class="total">
-
-<span>
-Total
-</span>
-
-<span id="cartTotal">
-₱0
-</span>
-
-</div>
-
-<button
-class="checkout"
-onclick="checkout()">
-
-Proceed to Order
-
-</button>
-
-</div>
-
-</aside>
-
-
-<!-- =========================
 PRODUCT DETAIL MODAL
 ========================== -->
 
@@ -1286,7 +1224,7 @@ PRODUCT DETAIL MODAL
 
             <div class="order-instruction-box">
                 <strong>HOW TO ORDER:</strong>
-                Click <em>Add to Bag</em> to reserve the item. When you click <em>Proceed to Order</em>, your order details will automatically be copied to your clipboard and you will be redirected to our Facebook Page chat—just <strong>Paste (Ctrl+V)</strong> the message to send us your order!
+                Click <em>Add to Bag</em> to reserve. Click <em>Proceed to Order</em> to copy details &amp; open Facebook. <strong>Paste (Ctrl+V)</strong> in chat!
             </div>
 
             <div class="modal-buttons">
@@ -1310,7 +1248,7 @@ let cart = [];
 const productsData = [
     {
         id: "forest-green-umbro",
-        title: "Umbro Y2K Pro Training Drill Top – White / Forest Green x Gold (Japan Archive Release)",
+        title: "Umbro Pro Training Drill Top – White / Forest Green x Gold (Japan Archive Release)",
         category: "outerwear",
         price: 3800,
         formattedPrice: "₱3,800",
