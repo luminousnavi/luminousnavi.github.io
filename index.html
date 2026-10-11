@@ -1282,7 +1282,7 @@ JAVASCRIPT
 
 let cart = [];
 
-// Pre-loved Items Data
+// Pre-loved Items Data (Eksaktong Case-Sensitive na may %20)
 const productsData = [
     {
         id: "forest-green-umbro",
@@ -1290,12 +1290,12 @@ const productsData = [
         category: "outerwear",
         price: 3800,
         formattedPrice: "₱3,800",
-        mainImage: "images/Forest%20Green%20UMBRO%20FRONT%20ZOOM.jpg",
+        mainImage: "images/Forest%20Green%20Umbro%20Front%20Zoom.jpg",
         images: [
-            "images/Forest%20Green%20UMBRO%20FRONT%20ZOOM.jpg",
-            "images/Forest%20Green%20UMBRO%20Front%20Right.jpg",
-            "images/Forest%20Green%20UMBRO%20Front%20left.jpg",
-            "images/Forest%20Green%20UMBRO%20Back.jpg"
+            "images/Forest%20Green%20Umbro%20Front%20Zoom.jpg",
+            "images/Forest%20Green%20Umbro%20Front%20Right.jpg",
+            "images/Forest%20Green%20Umbro%20Front%20Left.jpg",
+            "images/Forest%20Green%20Umbro%20Back.jpg"
         ],
         description: [
             "Authentic Umbro Pro Training Long-Sleeve Pullover / Piste Top",
@@ -1433,7 +1433,6 @@ function renderProducts(filterCat = 'all') {
         }
     });
 
-    // Attach event listeners to all "Add to Bag" buttons on grid items securely
     document.querySelectorAll('.add-cart').forEach(btn => {
         btn.onclick = (e) => {
             e.stopPropagation();
