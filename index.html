@@ -235,6 +235,7 @@ gap: 20px;
 .product {
 background: white;
 overflow: hidden;
+cursor: pointer;
 }
 
 .product-image {
@@ -288,6 +289,7 @@ padding: 8px 12px;
 cursor: pointer;
 font-size: 11px;
 text-transform: uppercase;
+z-index: 2;
 }
 
 .add-cart:hover {
@@ -429,6 +431,242 @@ gap: 30px;
 footer p {
 color: #888;
 font-size: 12px;
+}
+
+/* =========================
+PRODUCT MODAL (DETAIL VIEW)
+========================= */
+
+.modal-overlay {
+position: fixed;
+inset: 0;
+background: rgba(0,0,0,0.6);
+z-index: 2500;
+opacity: 0;
+visibility: hidden;
+transition: 0.3s;
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 20px;
+}
+
+.modal-overlay.open {
+opacity: 1;
+visibility: visible;
+}
+
+.product-modal {
+background: white;
+width: min(950px, 100%);
+max-height: 90vh;
+overflow-y: auto;
+position: relative;
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 30px;
+padding: 35px;
+border-radius: 4px;
+transform: translateY(20px);
+transition: transform 0.3s ease;
+}
+
+.modal-overlay.open .product-modal {
+transform: translateY(0);
+}
+
+.close-modal {
+position: absolute;
+top: 20px;
+right: 20px;
+border: none;
+background: none;
+font-size: 28px;
+cursor: pointer;
+z-index: 10;
+}
+
+.modal-gallery {
+display: flex;
+gap: 15px;
+}
+
+.modal-thumbnails-side {
+display: flex;
+flex-direction: column;
+gap: 10px;
+width: 65px;
+}
+
+.m-thumb {
+width: 65px;
+height: 65px;
+object-fit: cover;
+cursor: pointer;
+opacity: 0.5;
+border: 1px solid #ddd;
+}
+
+.m-thumb.active {
+opacity: 1;
+border-color: #111;
+}
+
+.modal-main-image {
+flex: 1;
+aspect-ratio: 4/5;
+background: #eee;
+overflow: hidden;
+}
+
+.modal-main-image img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+.modal-details {
+display: flex;
+flex-direction: column;
+}
+
+.modal-tag {
+font-size: 11px;
+text-transform: uppercase;
+letter-spacing: 2px;
+color: #777;
+margin-bottom: 8px;
+}
+
+.modal-title-text {
+font-size: 22px;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: -0.5px;
+margin-bottom: 12px;
+line-height: 1.2;
+}
+
+.modal-price-text {
+font-size: 20px;
+font-weight: bold;
+margin-bottom: 20px;
+}
+
+/* Tabs */
+.modal-tabs {
+display: flex;
+border-bottom: 1px solid #ddd;
+margin-bottom: 15px;
+gap: 20px;
+}
+
+.m-tab-btn {
+background: none;
+border: none;
+padding: 8px 0;
+font-size: 12px;
+text-transform: uppercase;
+letter-spacing: 1px;
+cursor: pointer;
+color: #777;
+font-weight: 600;
+position: relative;
+}
+
+.m-tab-btn.active {
+color: #111;
+}
+
+.m-tab-btn.active::after {
+content: '';
+position: absolute;
+bottom: -1px;
+left: 0;
+width: 100%;
+height: 2px;
+background: #111;
+}
+
+.m-tab-content {
+display: none;
+font-size: 13px;
+color: #444;
+margin-bottom: 20px;
+}
+
+.m-tab-content.active {
+display: block;
+}
+
+.m-tab-content ul {
+list-style-type: disc;
+padding-left: 18px;
+}
+
+.m-tab-content li {
+margin-bottom: 6px;
+}
+
+/* Ordering Instructions Box */
+.order-instruction-box {
+background: #f4f3f0;
+padding: 12px 15px;
+border-left: 3px solid #111;
+font-size: 12px;
+margin-bottom: 20px;
+color: #333;
+line-height: 1.4;
+}
+
+.order-instruction-box strong {
+display: block;
+text-transform: uppercase;
+letter-spacing: 1px;
+margin-bottom: 4px;
+font-size: 11px;
+}
+
+.modal-buttons {
+display: flex;
+flex-direction: column;
+gap: 10px;
+margin-top: auto;
+}
+
+.btn-black {
+width: 100%;
+padding: 15px;
+border: 1px solid #111;
+background: #111;
+color: white;
+cursor: pointer;
+text-transform: uppercase;
+letter-spacing: 2px;
+font-size: 12px;
+font-weight: bold;
+}
+
+.btn-black:hover {
+opacity: 0.85;
+}
+
+.btn-outline {
+width: 100%;
+padding: 15px;
+border: 1px solid #111;
+background: transparent;
+color: #111;
+cursor: pointer;
+text-transform: uppercase;
+letter-spacing: 2px;
+font-size: 12px;
+font-weight: bold;
+}
+
+.btn-outline:hover {
+background: #111;
+color: white;
 }
 
 /* =========================
@@ -599,6 +837,11 @@ gap: 40px;
 flex-direction: column;
 align-items: flex-start;
 }
+
+.product-modal {
+grid-template-columns: 1fr;
+padding: 20px;
+}
 }
 
 @media (max-width: 550px) {
@@ -735,395 +978,14 @@ part of your everyday wardrobe.
 
 <div class="filter-buttons">
 
-<button
-class="filter active"
-onclick="filterProducts('all', this)">
-All
-</button>
-
-<button
-class="filter"
-onclick="filterProducts('tops', this)">
-Tops
-</button>
-
-<button
-class="filter"
-onclick="filterProducts('bottoms', this)">
-Bottoms
-</button>
-
-<button
-class="filter"
-onclick="filterProducts('outerwear', this)">
-Outerwear
-</button>
+<button class="filter active" onclick="filterProducts('all', this)">All</button>
+<button class="filter" onclick="filterProducts('outerwear', this)">Outerwear</button>
 
 </div>
 
 
-<div class="products">
-
-
-<!-- PRODUCT 1 -->
-
-<article class="product" data-category="tops">
-
-<div class="product-image">
-
-<img
-src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=85"
-alt="Essential White Tee">
-
-</div>
-
-<div class="product-info">
-
-<h3>Essential White Tee</h3>
-
-<div class="product-category">
-Tops
-</div>
-
-<div class="product-bottom">
-
-<span class="price">
-₱799
-</span>
-
-<button
-class="add-cart"
-onclick="addToCart(
-'Essential White Tee',
-799,
-'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=85'
-)">
-
-Add to Bag
-
-</button>
-
-</div>
-
-</div>
-
-</article>
-
-
-<!-- PRODUCT 2 -->
-
-<article class="product" data-category="tops">
-
-<div class="product-image">
-
-<img
-src="https://images.unsplash.com/photo-1503341504253-dff4815485f1?auto=format&fit=crop&w=900&q=85"
-alt="Relaxed Black Tee">
-
-</div>
-
-<div class="product-info">
-
-<h3>Relaxed Black Tee</h3>
-
-<div class="product-category">
-Tops
-</div>
-
-<div class="product-bottom">
-
-<span class="price">
-₱899
-</span>
-
-<button
-class="add-cart"
-onclick="addToCart(
-'Relaxed Black Tee',
-899,
-'https://images.unsplash.com/photo-1503341504253-dff4815485f1?auto=format&fit=crop&w=900&q=85'
-)">
-
-Add to Bag
-
-</button>
-
-</div>
-
-</div>
-
-</article>
-
-
-<!-- PRODUCT 3 -->
-
-<article class="product" data-category="bottoms">
-
-<div class="product-image">
-
-<img
-src="https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=900&q=85"
-alt="Classic Denim">
-
-</div>
-
-<div class="product-info">
-
-<h3>Classic Denim</h3>
-
-<div class="product-category">
-Bottoms
-</div>
-
-<div class="product-bottom">
-
-<span class="price">
-₱1,499
-</span>
-
-<button
-class="add-cart"
-onclick="addToCart(
-'Classic Denim',
-1499,
-'https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=900&q=85'
-)">
-
-Add to Bag
-
-</button>
-
-</div>
-
-</div>
-
-</article>
-
-
-<!-- PRODUCT 4 -->
-
-<article class="product" data-category="outerwear">
-
-<div class="product-image">
-
-<img
-src="https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=900&q=85"
-alt="Minimal Jacket">
-
-</div>
-
-<div class="product-info">
-
-<h3>Minimal Jacket</h3>
-
-<div class="product-category">
-Outerwear
-</div>
-
-<div class="product-bottom">
-
-<span class="price">
-₱1,899
-</span>
-
-<button
-class="add-cart"
-onclick="addToCart(
-'Minimal Jacket',
-1899,
-'https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=900&q=85'
-)">
-
-Add to Bag
-
-</button>
-
-</div>
-
-</div>
-
-</article>
-
-
-<!-- PRODUCT 5 -->
-
-<article class="product" data-category="tops">
-
-<div class="product-image">
-
-<img
-src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=900&q=85"
-alt="Everyday Hoodie">
-
-</div>
-
-<div class="product-info">
-
-<h3>Everyday Hoodie</h3>
-
-<div class="product-category">
-Tops
-</div>
-
-<div class="product-bottom">
-
-<span class="price">
-₱1,399
-</span>
-
-<button
-class="add-cart"
-onclick="addToCart(
-'Everyday Hoodie',
-1399,
-'https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=900&q=85'
-)">
-
-Add to Bag
-
-</button>
-
-</div>
-
-</div>
-
-</article>
-
-
-<!-- PRODUCT 6 -->
-
-<article class="product" data-category="bottoms">
-
-<div class="product-image">
-
-<img
-src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=900&q=85"
-alt="Relaxed Trousers">
-
-</div>
-
-<div class="product-info">
-
-<h3>Relaxed Trousers</h3>
-
-<div class="product-category">
-Bottoms
-</div>
-
-<div class="product-bottom">
-
-<span class="price">
-₱1,299
-</span>
-
-<button
-class="add-cart"
-onclick="addToCart(
-'Relaxed Trousers',
-1299,
-'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=900&q=85'
-)">
-
-Add to Bag
-
-</button>
-
-</div>
-
-</div>
-
-</article>
-
-
-<!-- PRODUCT 7 -->
-
-<article class="product" data-category="outerwear">
-
-<div class="product-image">
-
-<img
-src="https://images.unsplash.com/photo-1548883354-7622d03aca27?auto=format&fit=crop&w=900&q=85"
-alt="Oversized Coat">
-
-</div>
-
-<div class="product-info">
-
-<h3>Oversized Coat</h3>
-
-<div class="product-category">
-Outerwear
-</div>
-
-<div class="product-bottom">
-
-<span class="price">
-₱2,499
-</span>
-
-<button
-class="add-cart"
-onclick="addToCart(
-'Oversized Coat',
-2499,
-'https://images.unsplash.com/photo-1548883354-7622d03aca27?auto=format&fit=crop&w=900&q=85'
-)">
-
-Add to Bag
-
-</button>
-
-</div>
-
-</div>
-
-</article>
-
-
-<!-- PRODUCT 8 -->
-
-<article class="product" data-category="tops">
-
-<div class="product-image">
-
-<img
-src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=900&q=85"
-alt="Signature Shirt">
-
-</div>
-
-<div class="product-info">
-
-<h3>Signature Shirt</h3>
-
-<div class="product-category">
-Tops
-</div>
-
-<div class="product-bottom">
-
-<span class="price">
-₱999
-</span>
-
-<button
-class="add-cart"
-onclick="addToCart(
-'Signature Shirt',
-999,
-'https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=900&q=85'
-)">
-
-Add to Bag
-
-</button>
-
-</div>
-
-</div>
-
-</article>
-
+<div class="products" id="productGrid">
+    <!-- Products will be dynamically loaded via JavaScript -->
 </div>
 
 </div>
@@ -1390,6 +1252,53 @@ Proceed to Order
 
 
 <!-- =========================
+PRODUCT DETAIL MODAL
+========================== -->
+
+<div class="modal-overlay" id="modalOverlay" onclick="closeProductModal(event)">
+    <div class="product-modal" id="productModalBox">
+        <button class="close-modal" onclick="closeProductModalDirect()">&times;</button>
+        
+        <div class="modal-gallery">
+            <div class="modal-thumbnails-side" id="modalThumbnailsSide"></div>
+            <div class="modal-main-image">
+                <img id="modalMainImage" src="" alt="Product view">
+            </div>
+        </div>
+
+        <div class="modal-details">
+            <div class="modal-tag">PRE-OWNED · ONE OF A KIND</div>
+            <h2 class="modal-title-text" id="modalTitle"></h2>
+            <div class="modal-price-text" id="modalPrice"></div>
+
+            <div class="modal-tabs">
+                <button class="m-tab-btn active" onclick="switchModalTab('description')">Description</button>
+                <button class="m-tab-btn" onclick="switchModalTab('specification')">Specification</button>
+            </div>
+
+            <div id="modalDescContent" class="m-tab-content active">
+                <ul id="modalDescList"></ul>
+            </div>
+
+            <div id="modalSpecContent" class="m-tab-content">
+                <ul id="modalSpecList"></ul>
+            </div>
+
+            <div class="order-instruction-box">
+                <strong>HOW TO ORDER:</strong>
+                Click <em>Add to Bag</em> to reserve the item. When you click <em>Proceed to Order</em>, your order details will automatically be copied to your clipboard and you will be redirected to our Facebook Page chat—just <strong>Paste (Ctrl+V)</strong> the message to send us your order!
+            </div>
+
+            <div class="modal-buttons">
+                <button class="btn-black" id="modalAddBagBtn">Add to Bag</button>
+                <button class="btn-outline" onclick="proceedDirectToOrder()">Proceed to Order</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- =========================
 JAVASCRIPT
 ========================== -->
 
@@ -1397,241 +1306,361 @@ JAVASCRIPT
 
 let cart = [];
 
+// Pre-loved Items Data
+const productsData = [
+    {
+        id: "forest-green-umbro",
+        title: "Umbro Y2K Pro Training Drill Top – White / Forest Green x Gold (Japan Archive Release)",
+        category: "outerwear",
+        price: 3800,
+        formattedPrice: "₱3,800",
+        mainImage: "images/Forest Green UMBRO FRONT ZOOM.jpg",
+        images: [
+            "images/Forest Green UMBRO FRONT ZOOM.jpg",
+            "images/Forest Green UMBRO Front Right.jpg",
+            "images/Forest Green UMBRO Front left.jpg",
+            "images/Forest Green UMBRO Back.jpg"
+        ],
+        description: [
+            "Authentic Umbro Pro Training Long-Sleeve Pullover / Piste Top",
+            "Spring/Summer 2010 Model Manufactured by Descente Co., Ltd.",
+            "Statement Piece: Massive Metallic Gold Back Graphic Logo & Front Accents",
+            "Pro Training Sleeve Badge Embroidery with Premium White Piping & Contrast Panels"
+        ],
+        specification: [
+            "Brand: Umbro (Japan Release via Descente Co., Ltd.)",
+            "Style Code: UBS4022",
+            "Type: PT Performance Piste Top / Pullover",
+            "Colorway: White / Forest Green / Gold & Black Accents",
+            "Condition: Pristine Mint Condition",
+            "Color rate: 10/10",
+            "Tag size: O (JASPO Standard) | Fits: Large to XL (Standard 180cm height)"
+        ]
+    },
+    {
+        id: "muave-adidas",
+        title: "Adidas 3-Stripes Track Jacket (Mauve / Dusty Purple)",
+        category: "outerwear",
+        price: 1300,
+        formattedPrice: "₱1,300",
+        mainImage: "images/Muave Adidas Front.jpg",
+        images: [
+            "images/Muave Adidas Front.jpg",
+            "images/Muave Adidas Front open zip.jpg",
+            "images/Muave Adidas Front Zoom in.jpg",
+            "images/Muave Adidas Front left.jpg",
+            "images/Muave Adidas Back.jpg"
+        ],
+        description: [
+            "Stand-Collar Full-Zip Track Jacket",
+            "Signature 3-Stripes Sleeves & Ribbed Trims",
+            "Muted Dusty Purple Finish With Side Pockets"
+        ],
+        specification: [
+            "Brand: Adidas",
+            "Type: Stand-Collar Full-Zip Track Jacket",
+            "Colorway: Mauve / Dusty Purple / White Accents",
+            "Condition: Excellent",
+            "Color rate: 10/10",
+            "Tag size: XXL | Fits: M-L only"
+        ]
+    },
+    {
+        id: "neon-adidas",
+        title: "Adidas Essentials Graphic Reversible Full-Zip Hoodie",
+        category: "outerwear",
+        price: 800,
+        formattedPrice: "₱800",
+        mainImage: "images/Neon Adidas Front.jpg",
+        images: [
+            "images/Neon Adidas Front.jpg",
+            "images/Neon Adidas Zoom in.jpg",
+            "images/Neon Adidas Front reverse.jpg",
+            "images/Neon Adidas Front reverse open zip.jpg",
+            "images/Neon Adidas back.jpg"
+        ],
+        description: [
+            "Reversible Full-Zip Hooded Jacket",
+            "Knit Side With Graphic Print & Nylon Windbreaker Reverse Side",
+            "Side Pockets & Embroidered Chest Logo"
+        ],
+        specification: [
+            "Brand: Adidas",
+            "Type: 2-in-1 Reversible Full-Zip Hooded Jacket",
+            "Colorway: Heather Grey / Neon Lime / Royal Blue Accents",
+            "Condition: Excellent",
+            "Color rate: 9.5",
+            "Tag size: | Fits: L-XL"
+        ]
+    },
+    {
+        id: "royal-blue-adidas",
+        title: "Adidas Climalite Training Track Jacket – Royal Blue",
+        category: "outerwear",
+        price: 1000,
+        formattedPrice: "₱1,000",
+        mainImage: "images/Royal Blue Adidas Front.jpg",
+        images: [
+            "images/Royal Blue Adidas Front.jpg",
+            "images/Royal Blue Adidas Front Open Zip.jpg",
+            "images/Royal Blue Adidas Front 2.jpg",
+            "images/Royal Blue Adidas Front Zoom.jpg",
+            "images/Royal Blue Adidas Front Zoom 2.jpg",
+            "images/Royal Blue Adidas Back.jpg"
+        ],
+        description: [
+            "Climalite Performance Full-Zip Track Jacket",
+            "Signature 3-Stripes Sleeves & Ribbed Trims",
+            "Contrast Yellow Zipper Accents & Side Pockets"
+        ],
+        specification: [
+            "Brand: Adidas",
+            "Type: Climalite Performance Full-Zip Track Jacket",
+            "Colorway: Royal Blue / White / Volt Yellow Accents",
+            "Condition: Excellent",
+            "Color rate: 10/10",
+            "Tag size: M | Fits: M-L"
+        ]
+    }
+];
+
+let activeModalProduct = null;
+
+// Render Products on Page Load
+function renderProducts(filterCat = 'all') {
+    const grid = document.getElementById('productGrid');
+    grid.innerHTML = '';
+
+    productsData.forEach(product => {
+        if (filterCat === 'all' || product.category === filterCat) {
+            const article = document.createElement('article');
+            article.className = 'product';
+            article.dataset.category = product.category;
+            article.onclick = (e) => {
+                if (e.target.classList.contains('add-cart')) return;
+                openProductModal(product);
+            };
+
+            article.innerHTML = `
+                <div class="product-image">
+                    <img src="${product.mainImage}" alt="${product.title}">
+                </div>
+                <div class="product-info">
+                    <h3>${product.title}</h3>
+                    <div class="product-category">Outerwear</div>
+                    <div class="product-bottom">
+                        <span class="price">${product.formattedPrice}</span>
+                        <button class="add-cart" onclick="addToCartByName('${product.id}')">Add to Bag</button>
+                    </div>
+                </div>
+            `;
+            grid.appendChild(article);
+        }
+    });
+}
+
+// Initial render
+renderProducts('all');
+
 
 /* =========================
 FILTER PRODUCTS
 ========================== */
 
 function filterProducts(category, button) {
-
-const products =
-document.querySelectorAll(".product");
-
-const filters =
-document.querySelectorAll(".filter");
-
-filters.forEach(function(filter) {
-filter.classList.remove("active");
-});
-
-button.classList.add("active");
-
-products.forEach(function(product) {
-
-if (
-category === "all" ||
-product.dataset.category === category
-) {
-
-product.style.display = "";
-
-} else {
-
-product.style.display = "none";
-
-}
-
-});
-
+    const filters = document.querySelectorAll(".filter");
+    filters.forEach(f => f.classList.remove("active"));
+    button.classList.add("active");
+    renderProducts(category);
 }
 
 
 /* =========================
-ADD TO CART
+PRODUCT MODAL LOGIC
 ========================== */
+
+function openProductModal(product) {
+    activeModalProduct = product;
+    document.getElementById('modalTitle').textContent = product.title;
+    document.getElementById('modalPrice').textContent = product.formattedPrice;
+    
+    // Description list
+    const descList = document.getElementById('modalDescList');
+    descList.innerHTML = product.description.map(d => `<li>${d}</li>`).join('');
+
+    // Specification list
+    const specList = document.getElementById('modalSpecList');
+    specList.innerHTML = product.specification.map(s => `<li>${s}</li>`).join('');
+
+    // Images
+    const mainImg = document.getElementById('modalMainImage');
+    mainImg.src = product.mainImage;
+
+    const sideThumbs = document.getElementById('modalThumbnailsSide');
+    sideThumbs.innerHTML = '';
+
+    product.images.forEach((imgSrc, idx) => {
+        const thumb = document.createElement('img');
+        thumb.src = imgSrc;
+        thumb.className = `m-thumb ${idx === 0 ? 'active' : ''}`;
+        thumb.onclick = () => {
+            mainImg.src = imgSrc;
+            document.querySelectorAll('.m-thumb').forEach(t => t.classList.remove('active'));
+            thumb.classList.add('active');
+        };
+        sideThumbs.appendChild(thumb);
+    });
+
+    // Add to bag button inside modal
+    const addBagBtn = document.getElementById('modalAddBagBtn');
+    addBagBtn.onclick = () => {
+        addToCart(product.title, product.price, product.mainImage);
+        closeProductModalDirect();
+    };
+
+    switchModalTab('description');
+    document.getElementById('modalOverlay').classList.add('open');
+}
+
+function closeProductModal(e) {
+    if (e.target.id === 'modalOverlay') {
+        closeProductModalDirect();
+    }
+}
+
+function closeProductModalDirect() {
+    document.getElementById('modalOverlay').classList.remove('open');
+}
+
+function switchModalTab(tabName) {
+    const descBtn = document.querySelectorAll('.m-tab-btn')[0];
+    const specBtn = document.querySelectorAll('.m-tab-btn')[1];
+    const descContent = document.getElementById('modalDescContent');
+    const specContent = document.getElementById('modalSpecContent');
+
+    if (tabName === 'description') {
+        descBtn.classList.add('active');
+        specBtn.classList.remove('active');
+        descContent.classList.add('active');
+        specContent.classList.remove('active');
+    } else {
+        specBtn.classList.add('active');
+        descBtn.classList.remove('active');
+        specContent.classList.add('active');
+        descContent.classList.remove('active');
+    }
+}
+
+function proceedDirectToOrder() {
+    if (!activeModalProduct) return;
+    
+    // Add current modal item to bag if not yet inside
+    const existing = cart.find(item => item.name === activeModalProduct.title);
+    if (!existing) {
+        cart.push({
+            name: activeModalProduct.title,
+            price: activeModalProduct.price,
+            image: activeModalProduct.mainImage,
+            quantity: 1
+        });
+        updateCart();
+    }
+    
+    closeProductModalDirect();
+    checkout();
+}
+
+
+/* =========================
+ADD TO CART & CART FUNCTIONS
+========================== */
+
+function addToCartByName(productId) {
+    const product = productsData.find(p => p.id === productId);
+    if (product) {
+        addToCart(product.title, product.price, product.mainImage);
+    }
+}
 
 function addToCart(name, price, image) {
+    const existing = cart.find(item => item.name === name);
 
-const existing =
-cart.find(item => item.name === name);
+    if (existing) {
+        existing.quantity++;
+    } else {
+        cart.push({
+            name: name,
+            price: price,
+            image: image,
+            quantity: 1
+        });
+    }
 
-if (existing) {
-
-existing.quantity++;
-
-} else {
-
-cart.push({
-name: name,
-price: price,
-image: image,
-quantity: 1
-});
-
+    updateCart();
+    openCart();
 }
-
-updateCart();
-
-openCart();
-
-}
-
-
-/* =========================
-UPDATE CART
-========================== */
 
 function updateCart() {
+    const cartItems = document.getElementById("cartItems");
+    const cartCount = document.getElementById("cartCount");
+    const cartTotal = document.getElementById("cartTotal");
 
-const cartItems =
-document.getElementById("cartItems");
+    cartItems.innerHTML = "";
+    let total = 0;
+    let itemCount = 0;
 
-const cartCount =
-document.getElementById("cartCount");
+    if (cart.length === 0) {
+        cartItems.innerHTML = '<div class="empty-cart">Your bag is empty.</div>';
+    }
 
-const cartTotal =
-document.getElementById("cartTotal");
+    cart.forEach(function(item, index) {
+        total += item.price * item.quantity;
+        itemCount += item.quantity;
 
+        const div = document.createElement("div");
+        div.className = "cart-item";
 
-cartItems.innerHTML = "";
+        div.innerHTML = `
+            <img src="${item.image}" alt="${item.name}">
+            <div>
+                <h4>${item.name}</h4>
+                <p>₱${item.price.toLocaleString()}</p>
+                <div class="quantity">
+                    <button onclick="changeQuantity(${index}, -1)">−</button>
+                    <span>${item.quantity}</span>
+                    <button onclick="changeQuantity(${index}, 1)">+</button>
+                </div>
+                <button class="remove" onclick="removeItem(${index})">Remove</button>
+            </div>
+        `;
+        cartItems.appendChild(div);
+    });
 
-let total = 0;
-let itemCount = 0;
-
-
-if (cart.length === 0) {
-
-cartItems.innerHTML =
-'<div class="empty-cart">Your bag is empty.</div>';
-
+    cartCount.textContent = itemCount;
+    cartTotal.textContent = "₱" + total.toLocaleString();
 }
-
-
-cart.forEach(function(item, index) {
-
-total += item.price * item.quantity;
-
-itemCount += item.quantity;
-
-
-const div =
-document.createElement("div");
-
-div.className = "cart-item";
-
-
-div.innerHTML = `
-
-<img
-src="${item.image}"
-alt="${item.name}"
->
-
-<div>
-
-<h4>
-${item.name}
-</h4>
-
-<p>
-₱${item.price.toLocaleString()}
-</p>
-
-<div class="quantity">
-
-<button
-onclick="changeQuantity(${index}, -1)">
-−
-</button>
-
-<span>
-${item.quantity}
-</span>
-
-<button
-onclick="changeQuantity(${index}, 1)">
-+
-</button>
-
-</div>
-
-<button
-class="remove"
-onclick="removeItem(${index})">
-Remove
-</button>
-
-</div>
-
-`;
-
-cartItems.appendChild(div);
-
-});
-
-
-cartCount.textContent =
-itemCount;
-
-cartTotal.textContent =
-"₱" + total.toLocaleString();
-
-}
-
-
-/* =========================
-CHANGE QUANTITY
-========================== */
 
 function changeQuantity(index, amount) {
-
-cart[index].quantity += amount;
-
-if (cart[index].quantity <= 0) {
-
-cart.splice(index, 1);
-
+    cart[index].quantity += amount;
+    if (cart[index].quantity <= 0) {
+        cart.splice(index, 1);
+    }
+    updateCart();
 }
-
-updateCart();
-
-}
-
-
-/* =========================
-REMOVE ITEM
-========================== */
 
 function removeItem(index) {
-
-cart.splice(index, 1);
-
-updateCart();
-
+    cart.splice(index, 1);
+    updateCart();
 }
-
-
-/* =========================
-OPEN CART
-========================== */
 
 function openCart() {
-
-document
-.getElementById("cart")
-.classList.add("open");
-
-document
-.getElementById("cartOverlay")
-.classList.add("open");
-
+    document.getElementById("cart").classList.add("open");
+    document.getElementById("cartOverlay").classList.add("open");
 }
 
-
-/* =========================
-CLOSE CART
-========================== */
-
 function closeCart() {
-
-document
-.getElementById("cart")
-.classList.remove("open");
-
-document
-.getElementById("cartOverlay")
-.classList.remove("open");
-
+    document.getElementById("cart").classList.remove("open");
+    document.getElementById("cartOverlay").classList.remove("open");
 }
 
 
@@ -1640,7 +1669,6 @@ CHECKOUT
 ========================== */
 
 function checkout() {
-
     if (cart.length === 0) {
         alert("Your bag is empty.");
         return;
@@ -1662,34 +1690,25 @@ function checkout() {
                "\n\nPlease guide me on how to proceed with payment and delivery details.";
 
     if (navigator.clipboard && navigator.clipboard.writeText) {
-
         navigator.clipboard.writeText(message)
             .then(function() {
-
                 alert(
                     "Your order details have been copied! " +
-                    "Please paste them into our Messenger chat using Ctrl+V."
+                    "You are now being redirected to our Facebook Page. Please paste your order details (Ctrl+V or Paste) into the chat."
                 );
-
             })
             .catch(function(err) {
-
                 console.error("Could not copy text:", err);
-
                 alert(
                     "We could not copy your order details automatically. " +
-                    "Messenger will still open."
+                    "You will still be redirected to our Facebook Page."
                 );
-
             });
-
     } else {
-
         alert(
-            "Messenger will open. " +
+            "You are now being redirected to our Facebook Page. " +
             "Please prepare your order details to paste into the chat."
         );
-
     }
 
     window.open("https://web.facebook.com/LuminousNaviPH", "_blank");
