@@ -303,6 +303,7 @@ cursor: pointer;
 font-size: 10px;
 text-transform: uppercase;
 letter-spacing: 0.5px;
+z-index: 2;
 }
 
 .add-cart:hover {
@@ -1248,6 +1249,32 @@ PRODUCT DETAIL MODAL
 
 
 <!-- =========================
+CART DRAWER
+========================== -->
+
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+
+<div class="cart" id="cart">
+    <div class="cart-header">
+        <h2>Your Bag</h2>
+        <button class="close-cart" onclick="closeCart()">&times;</button>
+    </div>
+
+    <div class="cart-items" id="cartItems">
+        <!-- Cart items will be loaded here -->
+    </div>
+
+    <div class="cart-footer">
+        <div class="total">
+            <span>Total</span>
+            <span id="cartTotal">₱0</span>
+        </div>
+        <button class="checkout" onclick="checkout()">Proceed to Checkout</button>
+    </div>
+</div>
+
+
+<!-- =========================
 JAVASCRIPT
 ========================== -->
 
@@ -1398,12 +1425,21 @@ function renderProducts(filterCat = 'all') {
                     <h3>${product.title}</h3>
                     <div class="product-bottom">
                         <span class="price">${product.formattedPrice}</span>
-                        <button class="add-cart" onclick="addToCartByName('${product.id}')">Add to Bag</button>
+                        <button class="add-cart" data-id="${product.id}">Add to Bag</button>
                     </div>
                 </div>
             `;
             grid.appendChild(article);
         }
+    });
+
+    // Attach event listeners to all "Add to Bag" buttons on grid items securely
+    document.querySelectorAll('.add-cart').forEach(btn => {
+        btn.onclick = (e) => {
+            e.stopPropagation();
+            const prodId = btn.getAttribute('data-id');
+            addToCartByName(prodId);
+        };
     });
 }
 
@@ -1462,8 +1498,10 @@ function openProductModal(product) {
     // Add to bag button inside modal
     const addBagBtn = document.getElementById('modalAddBagBtn');
     addBagBtn.onclick = () => {
-        addToCart(product.title, product.price, product.mainImage);
-        closeProductModalDirect();
+        if (activeModalProduct) {
+            addToCart(activeModalProduct.title, activeModalProduct.price, activeModalProduct.mainImage);
+            closeProductModalDirect();
+        }
     };
 
     switchModalTab('description');
