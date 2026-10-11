@@ -547,14 +547,6 @@ display: flex;
 flex-direction: column;
 }
 
-.modal-tag {
-font-size: 10px;
-text-transform: uppercase;
-letter-spacing: 1.5px;
-color: #777;
-margin-bottom: 4px;
-}
-
 .modal-title-text {
 font-size: 16px;
 font-weight: 700;
@@ -1225,7 +1217,6 @@ PRODUCT DETAIL MODAL
         </div>
 
         <div class="modal-details">
-            <div class="modal-tag">PRE-OWNED · ONE OF A KIND</div>
             <h2 class="modal-title-text" id="modalTitle"></h2>
             <div class="modal-price-text" id="modalPrice"></div>
 
@@ -1244,7 +1235,7 @@ PRODUCT DETAIL MODAL
 
             <div class="order-instruction-box">
                 <strong>HOW TO ORDER:</strong>
-                Click <em>Add to Bag</em> to reserve. Click <em>Proceed to Order</em> to copy details &amp; open Facebook. <strong>Paste (Ctrl+V)</strong> in chat!
+                Click <em>Add to Bag</em> to reserve. Click <em>Proceed to Order</em> to copy details &amp; open <strong>LuminousNavi PH Facebook page</strong>. <strong>Paste (Ctrl+V)</strong> in chat!
             </div>
 
             <div class="modal-buttons">
@@ -1272,12 +1263,12 @@ const productsData = [
         category: "outerwear",
         price: 3800,
         formattedPrice: "₱3,800",
-        mainImage: "images/Forest Green UMBRO FRONT ZOOM.jpg",
+        mainImage: "images/Forest%20Green%20UMBRO%20FRONT%20ZOOM.jpg",
         images: [
-            "images/Forest Green UMBRO FRONT ZOOM.jpg",
-            "images/Forest Green UMBRO Front Right.jpg",
-            "images/Forest Green UMBRO Front left.jpg",
-            "images/Forest Green UMBRO Back.jpg"
+            "images/Forest%20Green%20UMBRO%20FRONT%20ZOOM.jpg",
+            "images/Forest%20Green%20UMBRO%20Front%20Right.jpg",
+            "images/Forest%20Green%20UMBRO%20Front%20left.jpg",
+            "images/Forest%20Green%20UMBRO%20Back.jpg"
         ],
         description: [
             "Authentic Umbro Pro Training Long-Sleeve Pullover / Piste Top",
@@ -1301,13 +1292,13 @@ const productsData = [
         category: "outerwear",
         price: 1300,
         formattedPrice: "₱1,300",
-        mainImage: "images/Muave Adidas Front.jpg",
+        mainImage: "images/Muave%20Adidas%20Front.jpg",
         images: [
-            "images/Muave Adidas Front.jpg",
-            "images/Muave Adidas Front open zip.jpg",
-            "images/Muave Adidas Front Zoom in.jpg",
-            "images/Muave Adidas Front left.jpg",
-            "images/Muave Adidas Back.jpg"
+            "images/Muave%20Adidas%20Front.jpg",
+            "images/Muave%20Adidas%20Front%20open%20zip.jpg",
+            "images/Muave%20Adidas%20Front%20Zoom%20in.jpg",
+            "images/Muave%20Adidas%20Front%20left.jpg",
+            "images/Muave%20Adidas%20Back.jpg"
         ],
         description: [
             "Stand-Collar Full-Zip Track Jacket",
@@ -1329,13 +1320,13 @@ const productsData = [
         category: "outerwear",
         price: 800,
         formattedPrice: "₱800",
-        mainImage: "images/Neon Adidas Front.jpg",
+        mainImage: "images/Neon%20Adidas%20Front.jpg",
         images: [
-            "images/Neon Adidas Front.jpg",
-            "images/Neon Adidas Zoom in.jpg",
-            "images/Neon Adidas Front reverse.jpg",
-            "images/Neon Adidas Front reverse open zip.jpg",
-            "images/Neon Adidas back.jpg"
+            "images/Neon%20Adidas%20Front.jpg",
+            "images/Neon%20Adidas%20Zoom%20in.jpg",
+            "images/Neon%20Adidas%20Front%20reverse.jpg",
+            "images/Neon%20Adidas%20Front%20reverse%20open%20zip.jpg",
+            "images/Neon%20Adidas%20back.jpg"
         ],
         description: [
             "Reversible Full-Zip Hooded Jacket",
@@ -1357,14 +1348,14 @@ const productsData = [
         category: "outerwear",
         price: 1000,
         formattedPrice: "₱1,000",
-        mainImage: "images/Royal Blue Adidas Front.jpg",
+        mainImage: "images/Royal%20Blue%20Adidas%20Front.jpg",
         images: [
-            "images/Royal Blue Adidas Front.jpg",
-            "images/Royal Blue Adidas Front Open Zip.jpg",
-            "images/Royal Blue Adidas Front 2.jpg",
-            "images/Royal Blue Adidas Front Zoom.jpg",
-            "images/Royal Blue Adidas Front Zoom 2.jpg",
-            "images/Royal Blue Adidas Back.jpg"
+            "images/Royal%20Blue%20Adidas%20Front.jpg",
+            "images/Royal%20Blue%20Adidas%20Front%20Open%20Zip.jpg",
+            "images/Royal%20Blue%20Adidas%20Front%202.jpg",
+            "images/Royal%20Blue%20Adidas%20Front%20Zoom.jpg",
+            "images/Royal%20Blue%20Adidas%20Front%20Zoom%202.jpg",
+            "images/Royal%20Blue%20Adidas%20Back.jpg"
         ],
         description: [
             "Climalite Performance Full-Zip Track Jacket",
@@ -1651,19 +1642,19 @@ function checkout() {
             .then(function() {
                 alert(
                     "Your order details have been copied! " +
-                    "You are now being redirected to our Facebook Page. Please paste your order details (Ctrl+V or Paste) into the chat."
+                    "You are now being redirected to LuminousNavi PH Facebook Page. Please paste your order details (Ctrl+V or Paste) into the chat."
                 );
             })
             .catch(function(err) {
                 console.error("Could not copy text:", err);
                 alert(
                     "We could not copy your order details automatically. " +
-                    "You will still be redirected to our Facebook Page."
+                    "You will still be redirected to LuminousNavi PH Facebook Page."
                 );
             });
     } else {
         alert(
-            "You are now being redirected to our Facebook Page. " +
+            "You are now being redirected to LuminousNavi PH Facebook Page. " +
             "Please prepare your order details to paste into the chat."
         );
     }
